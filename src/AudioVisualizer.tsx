@@ -34,12 +34,15 @@ export const AudioVisualizer = ({
         fps,
         frame,
         audioData,
-        numberOfSamples: 64,
+        numberOfSamples: 512,
     });
 
-    const blockHeight = 5;
+    // 高域側を捨てる
+    const displayFrequencies = frequencies.slice(0, 64);
+
+    const blockHeight = 4;
     const blockGap = 2;
-    const maxBlocks = 60;
+    const maxBlocks = 80;
 
     return (
         <AbsoluteFill
@@ -69,7 +72,7 @@ export const AudioVisualizer = ({
                     gap: 4,
                 }}
             >
-                {frequencies.map(
+                {displayFrequencies.map(
                     (value, index) => {
                         const blocks = Math.min(
                             maxBlocks,
@@ -77,7 +80,7 @@ export const AudioVisualizer = ({
                                 value *
                                 maxBlocks,
                             ),
-                        ) + 1;
+                        ) * 4 + 1;
 
                         return (
                             <div
