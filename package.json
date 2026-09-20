@@ -1,20 +1,24 @@
 {
-  "name": "remotiondj",
+  "name": "remotion-vj",
   "version": "1.0.0",
-  "description": "My Remotion video",
+  "description": "Rendering DJ mix audio into a VJ video.",
   "repository": {},
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@remotion/cli": "4.0.526",
+    "@remotion/cli": "^4.0.526",
+    "@remotion/media": "^4.0.526",
+    "@remotion/media-parser": "^4.0.526",
+    "@remotion/media-utils": "^4.0.526",
+    "@remotion/tailwind-v4": "4.0.526",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "4.0.526",
-    "@remotion/tailwind-v4": "4.0.526",
     "tailwindcss": "4.0.0"
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.526",
+    "@types/node": "^26.6.2",
     "@types/react": "19.2.7",
     "@types/web": "0.0.166",
     "eslint": "9.19.0",

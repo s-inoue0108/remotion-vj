@@ -1,10 +1,3 @@
-import "./index.css";
-import { MyComposition } from "./Composition";
+import { RemotionRoot } from "./Composition";
 
-export const RemotionRoot: React.FC = () => {
-  return (
-    <>
-      <MyComposition />
-    </>
-  );
-};
+export { RemotionRoot };
