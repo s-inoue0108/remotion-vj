@@ -9,17 +9,22 @@ import {
     useAudioData,
     visualizeAudio,
 } from "@remotion/media-utils";
+
 import { VJBackground } from "./VJBackground";
 
 type Props = {
     audioFile: string;
 };
 
-export const AudioVisualizer = ({ audioFile }: Props) => {
+export const AudioVisualizer = ({
+    audioFile,
+}: Props) => {
     const frame = useCurrentFrame();
     const { fps } = useVideoConfig();
 
-    const audioData = useAudioData(staticFile(audioFile));
+    const audioData = useAudioData(
+        staticFile(audioFile),
+    );
 
     if (!audioData) {
         return null;
@@ -32,9 +37,9 @@ export const AudioVisualizer = ({ audioFile }: Props) => {
         numberOfSamples: 64,
     });
 
-    const blockHeight = 10;
+    const blockHeight = 5;
     const blockGap = 2;
-    const maxBlocks = 30;
+    const maxBlocks = 60;
 
     return (
         <AbsoluteFill
@@ -42,14 +47,12 @@ export const AudioVisualizer = ({ audioFile }: Props) => {
                 backgroundColor: "#000",
             }}
         >
-            {/* =========================
-                VJ Background
-            ========================= */}
-            <VJBackground />
+            {/* VJ Background */}
+            <VJBackground
+                frequencies={frequencies}
+            />
 
-            {/* =========================
-                Audio Visualizer
-            ========================= */}
+            {/* Block Visualizer */}
             <div
                 style={{
                     position: "absolute",
@@ -66,44 +69,54 @@ export const AudioVisualizer = ({ audioFile }: Props) => {
                     gap: 4,
                 }}
             >
-                {frequencies.map((value, index) => {
-                    const blocks = Math.min(
-                        maxBlocks,
-                        Math.floor(value * maxBlocks),
-                    );
+                {frequencies.map(
+                    (value, index) => {
+                        const blocks = Math.min(
+                            maxBlocks,
+                            Math.floor(
+                                value *
+                                maxBlocks,
+                            ),
+                        ) + 1;
 
-                    return (
-                        <div
-                            key={index}
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "flex-end",
-                                gap: blockGap,
-                                width: 10,
-                                height: "100%",
-                            }}
-                        >
-                            {Array.from({
-                                length: blocks,
-                            }).map((_, i) => (
-                                <div
-                                    key={i}
-                                    style={{
-                                        width: "100%",
-                                        height: blockHeight,
-                                        backgroundColor: "#fff",
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    );
-                })}
+                        return (
+                            <div
+                                key={index}
+                                style={{
+                                    display: "flex",
+                                    flexDirection:
+                                        "column",
+                                    justifyContent:
+                                        "flex-end",
+                                    gap: blockGap,
+                                    width: 10,
+                                    height: "100%",
+                                }}
+                            >
+                                {Array.from({
+                                    length: blocks,
+                                }).map(
+                                    (_, i) => (
+                                        <div
+                                            key={i}
+                                            style={{
+                                                width:
+                                                    "100%",
+                                                height:
+                                                    blockHeight,
+                                                backgroundColor:
+                                                    "#fff",
+                                            }}
+                                        />
+                                    ),
+                                )}
+                            </div>
+                        );
+                    },
+                )}
             </div>
 
-            {/* =========================
-                Audio
-            ========================= */}
+            {/* Audio */}
             <Html5Audio
                 src={staticFile(audioFile)}
             />
