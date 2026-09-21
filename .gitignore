@@ -4,11 +4,9 @@ dist
 
 # Ignore the output video from Git but not videos you import into src/.
 out
+public
 .DS_Store
 
 *.mp4
 *.wav
 *.flac
-public/*.mp4
-public/*.wav
-public/*.flac

@@ -1,51 +1,70 @@
 import {
   Composition,
+  staticFile,
   type CalculateMetadataFunction,
 } from "remotion";
 import { parseMedia } from "@remotion/media-parser";
-import { staticFile } from "remotion";
-import { AudioVisualizer } from "./AudioVisualizer";
 
-type Props = {
-  audioFile: string;
-};
+import { Wav2VJ } from "./Wav2VJ";
+import type { Metadata, Props } from "./types";
 
 const calculateMetadata: CalculateMetadataFunction<Props> = async ({
   props,
 }) => {
-  const metadata = await parseMedia({
-    src: staticFile(props.audioFile),
+  const metadataUrl = staticFile(
+    `${props.path}/metadata.json`,
+  );
+
+  const response = await fetch(metadataUrl);
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to load metadata: ${metadataUrl}`,
+    );
+  }
+
+  const metadata = (await response.json()) as Metadata;
+
+  const audioSrc = staticFile(
+    `${props.path}/${metadata.audio}`,
+  );
+
+  const media = await parseMedia({
+    src: audioSrc,
     fields: {
       durationInSeconds: true,
     },
   });
 
-  if (metadata.durationInSeconds === null) {
+  if (media.durationInSeconds === null) {
     throw new Error(
-      `Could not determine duration of ${props.audioFile}`,
+      `Could not determine duration of ${audioSrc}`,
     );
   }
 
   return {
     durationInFrames: Math.ceil(
-      metadata.durationInSeconds * 30,
+      media.durationInSeconds * 30,
     ),
+
+    props: {
+      ...props,
+      metadata,
+    },
   };
 };
 
-export const RemotionRoot = () => {
-  return (
-    <Composition
-      id="AudioVisualizer"
-      component={AudioVisualizer}
-      width={1920}
-      height={1080}
-      fps={30}
-      durationInFrames={1}
-      defaultProps={{
-        audioFile: "foo.wav",
-      }}
-      calculateMetadata={calculateMetadata}
-    />
-  );
-};
+export const RemotionRoot = () => (
+  <Composition
+    id="wav2vj"
+    component={Wav2VJ}
+    width={1920}
+    height={1080}
+    fps={30}
+    durationInFrames={1}
+    defaultProps={{
+      path: "",
+    }}
+    calculateMetadata={calculateMetadata}
+  />
+);
