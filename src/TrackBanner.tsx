@@ -108,7 +108,7 @@ export const TrackBanner = ({ path, frame, fps, tracks }: Props) => {
                             color: "#B8F3FF",
                             fontSize: 110,
                             fontWeight: 600,
-                            letterSpacing: 5.0,
+                            letterSpacing: 3.0,
                         }}
                     >
                         {track.title}
