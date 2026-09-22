@@ -97,6 +97,7 @@ export const TrackBanner = ({
                 alignItems: "center",
                 justifyContent: "center",
                 pointerEvents: "none",
+                zIndex: 60,
             }}
         >
             <div

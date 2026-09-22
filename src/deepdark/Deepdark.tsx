@@ -51,7 +51,10 @@ export const Deepdark = ({
     return (
         <AbsoluteFill>
             {/* VJ Background */}
-            <VJBackground />
+            <VJBackground
+                frame={frame}
+                fps={fps}
+            />
 
             {/* Spectrum Visualizer */}
             <SpectrumVisualizer frequencies={frequencies} />
@@ -76,6 +79,7 @@ export const Deepdark = ({
             {frame < opening * fps && (
                 <Intro
                     frame={frame}
+                    fps={fps}
                     title={title}
                     durationInFrames={opening * fps}
                     fadeDurationInFrames={fps}

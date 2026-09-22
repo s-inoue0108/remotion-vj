@@ -62,10 +62,12 @@ const shapes: Shape[] = [
     },
 ];
 
-export const VJBackground = () => {
-    const frame = useCurrentFrame();
-    const { fps } = useVideoConfig();
+type Props = {
+    frame: number;
+    fps: number;
+}
 
+export const VJBackground = ({ frame, fps }: Props) => {
     const time = frame / fps;
 
     /*

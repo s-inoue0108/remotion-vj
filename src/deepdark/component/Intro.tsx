@@ -7,12 +7,13 @@ import { VJBackground } from "./VJBackground";
 
 type Props = {
     frame: number;
+    fps: number;
     title: string;
     durationInFrames: number;
     fadeDurationInFrames: number;
 }
 
-export const Intro = ({ frame, title, durationInFrames, fadeDurationInFrames }: Props) => {
+export const Intro = ({ frame, fps, title, durationInFrames, fadeDurationInFrames }: Props) => {
     const fadeStart =
         durationInFrames - fadeDurationInFrames;
 
@@ -35,7 +36,10 @@ export const Intro = ({ frame, title, durationInFrames, fadeDurationInFrames }: 
             }}
         >
             {/* 背景 */}
-            <VJBackground />
+            <VJBackground
+                frame={frame}
+                fps={fps}
+            />
 
             {/* サムネイル */}
             <AbsoluteFill
