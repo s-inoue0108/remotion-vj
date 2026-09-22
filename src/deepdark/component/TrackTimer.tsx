@@ -58,8 +58,7 @@ export const TrackTimer = ({
             .toString()
             .padStart(2, "0")}:${seconds
                 .toString()
-                .padStart(2, "0")}
-        `;
+                .padStart(2, "0")}`;
 
     let opacity = 1;
 
@@ -84,13 +83,13 @@ export const TrackTimer = ({
         <div
             style={{
                 textAlign: "center",
-
                 fontFamily:
                     "Source Han Code JP, monospace",
                 fontSize: 20,
                 fontWeight: 300,
                 letterSpacing: 1.0,
                 color: "#B8F3FF",
+                opacity,
             }}
         >
             {time}
