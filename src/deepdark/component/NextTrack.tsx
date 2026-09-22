@@ -42,6 +42,9 @@ export const NextTrack = ({
 
     /*
      * 最後の曲
+     *
+     * 次の曲が存在しないため、
+     * 最後の曲自身を表示して NOW PLAYING にする。
      */
     if (!nextTrack) {
         return (
@@ -53,6 +56,9 @@ export const NextTrack = ({
 
     /*
      * 1曲目
+     *
+     * まだ曲の切り替えが発生していないため、
+     * 次の曲をそのまま NEXT に表示する。
      */
     if (currentIndex === 0) {
         return (
@@ -66,8 +72,9 @@ export const NextTrack = ({
      * 2曲目以降
      *
      * 現在曲の開始位置で、
-     * 直前まで NEXT に表示していた曲から
-     * 次の曲へスライドする。
+     * 直前まで NEXT に表示していた現在曲を
+     * 上へスライドさせ、
+     * 次の曲を下からスライドインする。
      */
     const transitionStart =
         currentTrack.start * fps;
@@ -99,11 +106,7 @@ export const NextTrack = ({
     );
 
     return (
-        <TrackFrame
-            label="NEXT"
-            nextLabel="NOW PLAYING"
-            labelProgress={progress}
-        >
+        <TrackFrame label="NEXT">
             {/* 直前まで NEXT に表示されていた曲 */}
             <div
                 style={{
@@ -133,17 +136,11 @@ export const NextTrack = ({
 
 const TrackFrame = ({
     label,
-    nextLabel,
-    labelProgress = 0,
     children,
 }: {
     label: "NEXT" | "NOW PLAYING";
-    nextLabel?: "NEXT" | "NOW PLAYING";
-    labelProgress?: number;
     children: React.ReactNode;
 }) => {
-    const hasTransition = nextLabel !== undefined;
-
     return (
         <div
             style={{
@@ -171,7 +168,7 @@ const TrackFrame = ({
                 {children}
             </div>
 
-            {/* NEXT */}
+            {/* ラベル */}
             <div
                 style={{
                     position: "absolute",
@@ -186,38 +183,11 @@ const TrackFrame = ({
                     lineHeight: 1,
                     color: "#00A8FF",
                     whiteSpace: "nowrap",
-                    opacity: hasTransition
-                        ? 1 - labelProgress
-                        : 1,
                     zIndex: 3,
                 }}
             >
                 {label}
             </div>
-
-            {/* NOW PLAYING */}
-            {nextLabel && (
-                <div
-                    style={{
-                        position: "absolute",
-                        left: "50%",
-                        top: -8,
-                        transform: "translateX(-50%)",
-                        fontFamily:
-                            "Urbanist, Noto Sans JP, sans-serif",
-                        fontSize: 16,
-                        fontWeight: 500,
-                        letterSpacing: 5.0,
-                        lineHeight: 1,
-                        color: "#00A8FF",
-                        whiteSpace: "nowrap",
-                        opacity: labelProgress,
-                        zIndex: 3,
-                    }}
-                >
-                    {nextLabel}
-                </div>
-            )}
         </div>
     );
 };
@@ -239,6 +209,7 @@ const TrackText = ({
                 boxSizing: "border-box",
             }}
         >
+            {/* 曲名 */}
             <div
                 style={{
                     fontFamily:
@@ -255,6 +226,7 @@ const TrackText = ({
                 {track.title}
             </div>
 
+            {/* 作曲者 */}
             <div
                 style={{
                     marginTop: 4,
