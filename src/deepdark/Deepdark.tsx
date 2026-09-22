@@ -10,18 +10,19 @@ import {
     visualizeAudio,
 } from "@remotion/media-utils";
 
-import { VJBackground } from "./VJBackground";
-import { TrackBanner } from "./TrackBanner";
-import { Intro } from "./Intro";
-import { ProgressBar } from "./ProgressBar";
-import { SpectrumVisualizer } from "./SpectrumVisualizer";
-import { SideContent } from "./SideContent";
+import { VJBackground } from "./component/VJBackground";
+import { TrackBanner } from "./component/TrackBanner";
+import { Intro } from "./component/Intro";
+import { SpectrumVisualizer } from "./component/SpectrumVisualizer";
+import { SideContent } from "./component/SideContent";
+import { MediaPlayer } from "./component/MediaPlayer";
 
-import { Props } from "./types";
+import { Props } from "../types";
 
-export const Wav2VJ = ({
+export const Deepdark = ({
     path,
     metadata,
+    durationInSeconds,
 }: Props) => {
     const frame = useCurrentFrame();
     const { fps, durationInFrames } = useVideoConfig();
@@ -30,7 +31,7 @@ export const Wav2VJ = ({
         return null;
     }
 
-    const { title, date, audio, tracks } = metadata;
+    const { title, date, audio, bpm, opening, tracks } = metadata;
 
     const audioSrc = staticFile(
         `${path}/${audio}`,
@@ -48,11 +49,7 @@ export const Wav2VJ = ({
     });
 
     return (
-        <AbsoluteFill
-            style={{
-                backgroundColor: "#000b29",
-            }}
-        >
+        <AbsoluteFill>
             {/* VJ Background */}
             <VJBackground />
 
@@ -62,19 +59,26 @@ export const Wav2VJ = ({
             {/* Side Content */}
             <SideContent sideText={`${title} | ${date}`} />
 
-            {/* Progress Bar */}
-            <ProgressBar frame={frame} fps={fps} durationInFrames={durationInFrames} tracks={tracks} />
-
             {/* Track Banner */}
             <TrackBanner path={path} frame={frame} fps={fps} tracks={tracks} />
 
+            {/* Media Player */}
+            <MediaPlayer
+                frame={frame}
+                fps={fps}
+                durationInFrames={durationInFrames}
+                durationInSeconds={durationInSeconds}
+                bpm={bpm}
+                tracks={tracks}
+            />
+
             {/* Intro */}
-            {frame < 5 * fps && (
+            {frame < opening * fps && (
                 <Intro
                     frame={frame}
                     title={title}
-                    durationInFrames={5 * fps}
-                    fadeDurationInFrames={2 * fps}
+                    durationInFrames={opening * fps}
+                    fadeDurationInFrames={fps}
                 />
             )}
 

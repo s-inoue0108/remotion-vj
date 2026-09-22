@@ -1,7 +1,8 @@
 #!/bin/bash
 
-ASSET="${1}"
-VIDEO="${2}"
+THEME="${1}"
+DIR="${2}"
+OUT="${3}"
 
-npx remotion render wav2vj "${VIDEO}" \
-  --props="{\"path\":\"${ASSET}\"}"
+npx remotion render "${THEME}" "${OUT}" \
+  --props="{\"path\":\"${DIR}\"}"

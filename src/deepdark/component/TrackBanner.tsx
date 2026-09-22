@@ -4,40 +4,58 @@ import {
     interpolate,
     staticFile,
 } from "remotion";
-import { Track } from "./types";
+import { Track } from "../../types";
 
 type Props = {
     path: string;
     frame: number;
     fps: number;
     tracks: Track[];
-}
+};
 
 const FADE_DURATION = 1.0; // seconds
 
-export const TrackBanner = ({ path, frame, fps, tracks }: Props) => {
+export const TrackBanner = ({
+    path,
+    frame,
+    fps,
+    tracks,
+}: Props) => {
     const time = frame / fps;
 
-    const track = tracks.find(
-        (track) =>
-            time >= track.duration.start &&
-            time < track.duration.end,
+    const currentIndex = tracks.findIndex(
+        (track, index) => {
+            const start = track.start;
+            const nextStart =
+                tracks[index + 1]?.start;
+
+            return (
+                time >= start &&
+                (
+                    nextStart === undefined ||
+                    time < nextStart
+                )
+            );
+        },
     );
 
-    if (!track) {
+    if (currentIndex < 0) {
         return null;
     }
+
+    const track = tracks[currentIndex];
+    const nextTrack = tracks[currentIndex + 1];
 
     const fadeFrames = FADE_DURATION * fps;
 
     /*
-     * 曲の開始・終了付近でフェード
+     * 曲の開始位置からフェードイン
      */
     const fadeIn = interpolate(
         frame,
         [
-            track.duration.start * fps,
-            track.duration.start * fps + fadeFrames,
+            track.start * fps,
+            track.start * fps + fadeFrames,
         ],
         [0, 1],
         {
@@ -46,18 +64,27 @@ export const TrackBanner = ({ path, frame, fps, tracks }: Props) => {
         },
     );
 
-    const fadeOut = interpolate(
-        frame,
-        [
-            track.duration.end * fps - fadeFrames,
-            track.duration.end * fps,
-        ],
-        [1, 0],
-        {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-        },
-    );
+    /*
+     * 次の曲の開始位置からフェードアウト
+     *
+     * 最後の曲には次曲がないため、
+     * フェードアウトしない。
+     */
+    const fadeOut = nextTrack
+        ? interpolate(
+            frame,
+            [
+                nextTrack.start * fps -
+                fadeFrames,
+                nextTrack.start * fps,
+            ],
+            [1, 0],
+            {
+                extrapolateLeft: "clamp",
+                extrapolateRight: "clamp",
+            },
+        )
+        : 1;
 
     const opacity = Math.min(
         fadeIn,
@@ -77,17 +104,16 @@ export const TrackBanner = ({ path, frame, fps, tracks }: Props) => {
                     display: "flex",
                     alignItems: "center",
                     gap: 24,
-
                     padding: "20px 32px",
-
                     fontFamily:
                         "Urbanist, Noto Sans JP, sans-serif",
-
                     opacity,
                 }}
             >
                 <Img
-                    src={staticFile(`${path}/${track.cover}`)}
+                    src={staticFile(
+                        `${path}/${track.cover}`,
+                    )}
                     style={{
                         width: 200,
                         height: 200,

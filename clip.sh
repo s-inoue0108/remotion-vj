@@ -1,9 +1,10 @@
 #!/bin/bash
 
-ASSET="${1}"
-PNG="${2}"
-FRAME=$3
+THEME="${1}"
+DIR="${2}"
+OUT="${3}"
+FRAME=$4
 
-npx remotion still wav2vj "${PNG}" \
-  --props="{\"path\":\"${ASSET}\"}" \
+npx remotion still "${THEME}" "${OUT}" \
+  --props="{\"path\":\"${DIR}\"}" \
   --frame $FRAME

@@ -27,7 +27,7 @@ export const SideContent = ({ sideText }: Props) => {
                         fontSize: 16,
                         fontWeight: 100,
                         letterSpacing: 5.0,
-                        color: "#fff",
+                        color: "#94CCD8",
                         transform: "rotate(90deg)",
                     }}
                 >
@@ -57,7 +57,7 @@ export const SideContent = ({ sideText }: Props) => {
                         fontSize: 16,
                         fontWeight: 100,
                         letterSpacing: 5.0,
-                        color: "#fff",
+                        color: "#94CCD8",
                         transform: "rotate(-90deg)",
                     }}
                 >

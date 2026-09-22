@@ -5,7 +5,9 @@ import {
 } from "remotion";
 import { parseMedia } from "@remotion/media-parser";
 
-import { Wav2VJ } from "./Wav2VJ";
+import { Deepdark } from "./deepdark/Deepdark";
+import { Vividlight } from "./vividlight/Vividlight";
+
 import type { Metadata, Props } from "./types";
 
 const calculateMetadata: CalculateMetadataFunction<Props> = async ({
@@ -34,6 +36,7 @@ const calculateMetadata: CalculateMetadataFunction<Props> = async ({
     fields: {
       durationInSeconds: true,
     },
+    acknowledgeRemotionLicense: true
   });
 
   if (media.durationInSeconds === null) {
@@ -42,29 +45,35 @@ const calculateMetadata: CalculateMetadataFunction<Props> = async ({
     );
   }
 
+  const durationInSeconds = media.durationInSeconds
+
   return {
     durationInFrames: Math.ceil(
-      media.durationInSeconds * 30,
+      durationInSeconds * 30,
     ),
 
     props: {
       ...props,
       metadata,
+      durationInSeconds,
     },
   };
 };
 
 export const RemotionRoot = () => (
-  <Composition
-    id="wav2vj"
-    component={Wav2VJ}
-    width={1920}
-    height={1080}
-    fps={30}
-    durationInFrames={1}
-    defaultProps={{
-      path: "",
-    }}
-    calculateMetadata={calculateMetadata}
-  />
+  <>
+    <Composition
+      id="deepdark"
+      component={Deepdark}
+      width={1920}
+      height={1080}
+      fps={30}
+      durationInFrames={1}
+      defaultProps={{
+        path: "",
+        durationInSeconds: 0,
+      }}
+      calculateMetadata={calculateMetadata}
+    />
+  </>
 );
