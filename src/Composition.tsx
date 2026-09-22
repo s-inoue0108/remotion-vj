@@ -6,7 +6,6 @@ import {
 import { parseMedia } from "@remotion/media-parser";
 
 import { Deepdark } from "./deepdark/Deepdark";
-import { Vividlight } from "./vividlight/Vividlight";
 
 import type { Metadata, Props } from "./types";
 
