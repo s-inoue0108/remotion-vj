@@ -89,7 +89,7 @@ export const VJBackground = ({ frame, fps }: Props) => {
     return (
         <AbsoluteFill
             style={{
-                backgroundColor: "#050A1C",
+                backgroundColor: "#FAF7FC",
                 overflow: "hidden",
             }}
         >
@@ -114,24 +114,24 @@ export const VJBackground = ({ frame, fps }: Props) => {
 
                     background: `
                         radial-gradient(
-                            circle at 20% 30%,
-                            rgba(0, 168, 255, 0.16),
-                            transparent 38%
+                            circle at 12% 18%,
+                            rgba(255, 64, 160, 0.13),
+                            transparent 36%
                         ),
                         radial-gradient(
-                            circle at 80% 70%,
-                            rgba(0, 217, 255, 0.12),
+                            circle at 88% 28%,
+                            rgba(168, 85, 247, 0.10),
+                            transparent 40%
+                        ),
+                        radial-gradient(
+                            circle at 78% 82%,
+                            rgba(255, 105, 180, 0.09),
                             transparent 42%
                         ),
-                        radial-gradient(
-                            circle at 50% 50%,
-                            rgba(7, 89, 200, 0.10),
-                            transparent 45%
-                        ),
-                        #020817
+                        #EDE9F1
                     `,
 
-                    border: "2px solid rgba(0, 217, 255, 0.25)",
+                    border: "2px solid rgba(168, 85, 247, 0.25)",
                 }}
             />
 
@@ -226,7 +226,7 @@ export const VJBackground = ({ frame, fps }: Props) => {
                             border:
                                 shape.type !==
                                     "triangle"
-                                    ? "2px solid rgba(210, 220, 255, 0.8)"
+                                    ? "2px solid rgba(190, 90, 140, 0.8)"
                                     : undefined,
 
                             borderRadius:
@@ -238,7 +238,7 @@ export const VJBackground = ({ frame, fps }: Props) => {
                             background:
                                 shape.type ===
                                     "triangle"
-                                    ? "rgba(180, 190, 255, 0.06)"
+                                    ? "rgba(190, 90, 160, 0.18)"
                                     : "transparent",
 
                             clipPath:

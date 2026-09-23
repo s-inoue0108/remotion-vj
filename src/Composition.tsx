@@ -6,6 +6,7 @@ import {
 import { parseMedia } from "@remotion/media-parser";
 
 import { Deepdark } from "./deepdark/Deepdark";
+import { Fancylight } from "./fancylight/Fancylight";
 
 import type { Metadata, Props } from "./types";
 
@@ -64,6 +65,19 @@ export const RemotionRoot = () => (
     <Composition
       id="deepdark"
       component={Deepdark}
+      width={1920}
+      height={1080}
+      fps={30}
+      durationInFrames={1}
+      defaultProps={{
+        path: "",
+        durationInSeconds: 0,
+      }}
+      calculateMetadata={calculateMetadata}
+    />
+    <Composition
+      id="fancylight"
+      component={Fancylight}
       width={1920}
       height={1080}
       fps={30}
