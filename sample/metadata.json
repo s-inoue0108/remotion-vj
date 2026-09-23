@@ -1,0 +1,28 @@
+{
+    "title": "Sample Mix",
+    "audio": "sample.wav",
+    "date": "2026-09-22",
+    "bpm": 160,
+    "opening": 3,
+    "theme": "deepdark.json",
+    "tracks": [
+        {
+            "title": "music 1",
+            "composer": "composer 1",
+            "cover": "covers/cover.jpg",
+            "start": 0
+        },
+        {
+            "title": "music 2",
+            "composer": "composer 2",
+            "cover": "covers/cover.jpg",
+            "start": 5
+        },
+        {
+            "title": "music 3",
+            "composer": "composer 3",
+            "cover": "covers/cover2.jpg",
+            "start": 10
+        }
+    ]
+}

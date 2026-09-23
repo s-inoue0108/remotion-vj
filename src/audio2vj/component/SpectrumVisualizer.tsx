@@ -1,15 +1,24 @@
+import { Theme } from "../../types";
+import { interpolateColor } from "../../utils/colorHandler";
+
 type Props = {
     frequencies: number[];
     displayFrequencies?: number;
     maxBlocks?: number;
+    theme: Theme;
 };
 
 export const SpectrumVisualizer = ({
     frequencies,
     displayFrequencies = 64,
     maxBlocks = 80,
+    theme,
 }: Props) => {
-    const visibleFrequencies = frequencies.slice(0, displayFrequencies);
+    const visibleFrequencies = frequencies.slice(
+        0,
+        displayFrequencies,
+    );
+
     const blockGap = 2;
 
     return (
@@ -44,25 +53,11 @@ export const SpectrumVisualizer = ({
                         visibleFrequencies.length - 1,
                     );
 
-                let r: number;
-                let g: number;
-                let b: number;
-
-                if (t < 0.5) {
-                    // Blue → Cyan
-                    const p = t * 2;
-
-                    r = 0;
-                    g = 168 + (229 - 168) * p;
-                    b = 255;
-                } else {
-                    // Cyan → Electric Lime
-                    const p = (t - 0.5) * 2;
-
-                    r = 0 + 57 * p;
-                    g = 229 + (255 - 229) * p;
-                    b = 255 - 229 * p;
-                }
+                const blockColor = interpolateColor(
+                    theme.accent.primary,
+                    theme.accent.secondary,
+                    t,
+                );
 
                 return (
                     <div
@@ -83,11 +78,7 @@ export const SpectrumVisualizer = ({
                                 style={{
                                     width: "60%",
                                     height: "1vh",
-                                    backgroundColor: `rgb(
-                                        ${Math.round(r)},
-                                        ${Math.round(g)},
-                                        ${Math.round(b)}
-                                    )`,
+                                    backgroundColor: blockColor,
                                 }}
                             />
                         ))}

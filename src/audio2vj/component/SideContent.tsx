@@ -1,8 +1,11 @@
+import { Theme } from "../../types";
+
 type Props = {
-    sideText: string;
+    text: string;
+    theme: Theme;
 };
 
-export const SideContent = ({ sideText }: Props) => {
+export const SideContent = ({ text, theme }: Props) => {
     return (
         <>
             {/* Left */}
@@ -27,11 +30,11 @@ export const SideContent = ({ sideText }: Props) => {
                         fontSize: 16,
                         fontWeight: 100,
                         letterSpacing: 5.0,
-                        color: "#94CCD8",
+                        color: theme.text.secondary,
                         transform: "rotate(90deg)",
                     }}
                 >
-                    {sideText}
+                    {text}
                 </div>
             </div>
 
@@ -57,11 +60,11 @@ export const SideContent = ({ sideText }: Props) => {
                         fontSize: 16,
                         fontWeight: 100,
                         letterSpacing: 5.0,
-                        color: "#94CCD8",
+                        color: theme.text.secondary,
                         transform: "rotate(-90deg)",
                     }}
                 >
-                    {sideText}
+                    {text}
                 </div>
             </div>
         </>

@@ -1,6 +1,7 @@
 import {
     AbsoluteFill,
 } from "remotion";
+import { Theme } from "../../types";
 
 type Shape = {
     x: number;
@@ -63,9 +64,10 @@ const shapes: Shape[] = [
 type Props = {
     frame: number;
     fps: number;
+    theme: Theme;
 }
 
-export const VJBackground = ({ frame, fps }: Props) => {
+export const VJBackground = ({ frame, fps, theme }: Props) => {
     const time = frame / fps;
 
     /*
@@ -89,7 +91,7 @@ export const VJBackground = ({ frame, fps }: Props) => {
     return (
         <AbsoluteFill
             style={{
-                backgroundColor: "#FAF7FC",
+                backgroundColor: theme.background.primary,
                 overflow: "hidden",
             }}
         >
@@ -114,24 +116,24 @@ export const VJBackground = ({ frame, fps }: Props) => {
 
                     background: `
                         radial-gradient(
-                            circle at 12% 18%,
-                            rgba(255, 64, 160, 0.13),
-                            transparent 36%
+                            circle at 20% 30%,
+                            ${theme.background.layer.top},
+                            transparent 38%
                         ),
                         radial-gradient(
-                            circle at 88% 28%,
-                            rgba(168, 85, 247, 0.10),
-                            transparent 40%
-                        ),
-                        radial-gradient(
-                            circle at 78% 82%,
-                            rgba(255, 105, 180, 0.09),
+                            circle at 80% 70%,
+                            ${theme.background.layer.middle},
                             transparent 42%
                         ),
-                        #EDE9F1
+                        radial-gradient(
+                            circle at 50% 50%,
+                            ${theme.background.layer.bottom},
+                            transparent 45%
+                        ),
+                        #020817
                     `,
 
-                    border: "2px solid rgba(168, 85, 247, 0.25)",
+                    border: `2px solid ${theme.background.layer.border}`,
                 }}
             />
 
@@ -226,7 +228,7 @@ export const VJBackground = ({ frame, fps }: Props) => {
                             border:
                                 shape.type !==
                                     "triangle"
-                                    ? "2px solid rgba(190, 90, 140, 0.8)"
+                                    ? `2px solid ${theme.background.geometricEffect.border}`
                                     : undefined,
 
                             borderRadius:
@@ -238,7 +240,7 @@ export const VJBackground = ({ frame, fps }: Props) => {
                             background:
                                 shape.type ===
                                     "triangle"
-                                    ? "rgba(190, 90, 160, 0.18)"
+                                    ? `2px solid ${theme.background.geometricEffect.background}`
                                     : "transparent",
 
                             clipPath:

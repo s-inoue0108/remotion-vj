@@ -7,22 +7,24 @@ import {
     FaStepBackward,
     FaStepForward,
 } from "react-icons/fa";
-import type { Track } from "../../types";
+import type { Theme, Track } from "../../types";
 
 type Props = {
     frame: number;
     fps: number;
     tracks: Track[];
+    theme: Theme;
 };
-
-const ACTIVE_COLOR = "#BE789C";
-const INACTIVE_COLOR = "rgba(255, 105, 180, 0.15)";
 
 export const PlayerControls = ({
     frame,
     fps,
     tracks,
+    theme,
 }: Props) => {
+    const ACTIVE_COLOR = theme.text.primary;
+    const INACTIVE_COLOR = theme.text.inactive;
+
     const time = frame / fps;
 
     const currentIndex = tracks.findIndex(

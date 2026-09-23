@@ -1,7 +1,6 @@
 import {
     AbsoluteFill,
     Html5Audio,
-    staticFile,
     useCurrentFrame,
     useVideoConfig,
 } from "remotion";
@@ -19,27 +18,21 @@ import { MediaPlayer } from "./component/MediaPlayer";
 
 import { Props } from "../types";
 
-export const Deepdark = ({
+export const Audio2VJ = ({
     path,
     metadata,
+    theme,
+    audioSrc,
     durationInSeconds,
 }: Props) => {
     const frame = useCurrentFrame();
     const { fps, durationInFrames } = useVideoConfig();
 
-    if (!metadata) {
-        return null;
-    }
+    if (!metadata || !theme) return null;
+    const { title, date, bpm, opening, tracks } = metadata;
 
-    const { title, date, audio, bpm, opening, tracks } = metadata;
-
-    const audioSrc = staticFile(
-        `${path}/${audio}`,
-    );
     const audioData = useAudioData(audioSrc);
-    if (!audioData) {
-        return null;
-    }
+    if (!audioData) return null;
 
     const frequencies = visualizeAudio({
         fps,
@@ -54,16 +47,23 @@ export const Deepdark = ({
             <VJBackground
                 frame={frame}
                 fps={fps}
+                theme={theme}
             />
 
             {/* Spectrum Visualizer */}
-            <SpectrumVisualizer frequencies={frequencies} />
+            <SpectrumVisualizer frequencies={frequencies} theme={theme} />
 
             {/* Side Content */}
-            <SideContent sideText={`${title} | ${date}`} />
+            <SideContent text={`${title} | ${date}`} theme={theme} />
 
             {/* Track Banner */}
-            <TrackBanner path={path} frame={frame} fps={fps} tracks={tracks} />
+            <TrackBanner
+                path={path}
+                frame={frame}
+                fps={fps}
+                tracks={tracks}
+                theme={theme}
+            />
 
             {/* Media Player */}
             <MediaPlayer
@@ -73,6 +73,7 @@ export const Deepdark = ({
                 durationInSeconds={durationInSeconds}
                 bpm={bpm}
                 tracks={tracks}
+                theme={theme}
             />
 
             {/* Intro */}
@@ -83,6 +84,7 @@ export const Deepdark = ({
                     title={title}
                     durationInFrames={opening * fps}
                     fadeDurationInFrames={fps}
+                    theme={theme}
                 />
             )}
 

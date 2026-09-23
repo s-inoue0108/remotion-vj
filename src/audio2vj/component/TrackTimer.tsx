@@ -1,11 +1,12 @@
 import { interpolate } from "remotion";
-import type { Track } from "../../types";
+import type { Theme, Track } from "../../types";
 
 type Props = {
     frame: number;
     fps: number;
     tracks: Track[];
     durationInSeconds: number;
+    theme: Theme;
 };
 
 const BLINK_DURATION = 5;
@@ -15,6 +16,7 @@ export const TrackTimer = ({
     fps,
     tracks,
     durationInSeconds,
+    theme,
 }: Props) => {
     const currentTime = frame / fps;
 
@@ -88,7 +90,7 @@ export const TrackTimer = ({
                 fontSize: 20,
                 fontWeight: 300,
                 letterSpacing: 1.0,
-                color: "#B8F3FF",
+                color: theme.text.primary,
                 opacity,
             }}
         >

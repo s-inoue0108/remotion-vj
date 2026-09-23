@@ -1,10 +1,12 @@
 import { FaCompactDisc } from "react-icons/fa6";
+import { Theme } from "../../types";
 
 type Props = {
     frame: number;
     fps: number;
     durationInFrames: number;
     rpm: number;
+    theme: Theme;
     direction?: "clockwise" | "counterclockwise";
 };
 
@@ -21,6 +23,7 @@ export const ProgressDisc = ({
     fps,
     durationInFrames,
     rpm,
+    theme,
     direction = "clockwise",
 }: Props) => {
     const progress = Math.min(frame / durationInFrames, 1);
@@ -65,7 +68,7 @@ export const ProgressDisc = ({
                     cy={PROGRESS_SIZE / 2}
                     r={RADIUS}
                     fill="none"
-                    stroke="rgba(255,105,180,0.15)"
+                    stroke={theme.background.progressGuide}
                     strokeWidth={STROKE_WIDTH}
                 />
 
@@ -75,7 +78,7 @@ export const ProgressDisc = ({
                     cy={PROGRESS_SIZE / 2}
                     r={RADIUS}
                     fill="none"
-                    stroke="#FF4FA3"
+                    stroke={theme.accent.primary}
                     strokeWidth={STROKE_WIDTH}
                     strokeLinecap="round"
                     strokeDasharray={circumference}
@@ -91,7 +94,7 @@ export const ProgressDisc = ({
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    color: "#9A7188",
+                    color: theme.text.secondary,
                     transform: `rotate(${rotation}deg)`,
                 }}
             >

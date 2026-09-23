@@ -1,5 +1,5 @@
 import { AbsoluteFill } from "remotion";
-import { Track } from "../../types";
+import { Theme, Track } from "../../types";
 import { ProgressDisc } from "./ProgressDisc";
 import { NextTrack } from "./NextTrack";
 import { TrackTimer } from "./TrackTimer";
@@ -12,6 +12,7 @@ type Props = {
     durationInSeconds: number;
     bpm: number;
     tracks: Track[];
+    theme: Theme;
 };
 
 export const MediaPlayer = ({
@@ -21,6 +22,7 @@ export const MediaPlayer = ({
     durationInSeconds,
     bpm,
     tracks,
+    theme,
 }: Props) => {
     return (
         <AbsoluteFill
@@ -45,6 +47,7 @@ export const MediaPlayer = ({
                     fps={fps}
                     durationInFrames={durationInFrames}
                     rpm={bpm / 8}
+                    theme={theme}
                     direction="clockwise"
                 />
 
@@ -61,17 +64,20 @@ export const MediaPlayer = ({
                         frame={frame}
                         fps={fps}
                         tracks={tracks}
+                        theme={theme}
                     />
                     <PlayerControls
                         frame={frame}
                         fps={fps}
                         tracks={tracks}
+                        theme={theme}
                     />
                     <TrackTimer
                         frame={frame}
                         fps={fps}
                         durationInSeconds={durationInSeconds}
                         tracks={tracks}
+                        theme={theme}
                     />
                 </div>
 
@@ -81,6 +87,7 @@ export const MediaPlayer = ({
                     fps={fps}
                     durationInFrames={durationInFrames}
                     rpm={bpm / 16}
+                    theme={theme}
                     direction="counterclockwise"
                 />
             </div>

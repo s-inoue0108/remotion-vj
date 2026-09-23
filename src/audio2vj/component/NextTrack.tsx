@@ -1,10 +1,11 @@
 import { Easing, interpolate } from "remotion";
-import type { Track } from "../../types";
+import type { Theme, Track } from "../../types";
 
 type Props = {
     frame: number;
     fps: number;
     tracks: Track[];
+    theme: Theme;
 };
 
 const TRANSITION_DURATION = 20;
@@ -14,6 +15,7 @@ export const NextTrack = ({
     frame,
     fps,
     tracks,
+    theme,
 }: Props) => {
     const currentTime = frame / fps;
 
@@ -48,8 +50,8 @@ export const NextTrack = ({
      */
     if (!nextTrack) {
         return (
-            <TrackFrame label="NOW PLAYING">
-                <TrackText track={currentTrack} />
+            <TrackFrame label="NOW PLAYING" theme={theme}>
+                <TrackText track={currentTrack} theme={theme} />
             </TrackFrame>
         );
     }
@@ -62,8 +64,8 @@ export const NextTrack = ({
      */
     if (currentIndex === 0) {
         return (
-            <TrackFrame label="NEXT">
-                <TrackText track={nextTrack} />
+            <TrackFrame label="NEXT" theme={theme}>
+                <TrackText track={nextTrack} theme={theme} />
             </TrackFrame>
         );
     }
@@ -106,7 +108,7 @@ export const NextTrack = ({
     );
 
     return (
-        <TrackFrame label="NEXT">
+        <TrackFrame label="NEXT" theme={theme}>
             {/* 直前まで NEXT に表示されていた曲 */}
             <div
                 style={{
@@ -116,7 +118,7 @@ export const NextTrack = ({
                     opacity: 1 - progress,
                 }}
             >
-                <TrackText track={currentTrack} />
+                <TrackText track={currentTrack} theme={theme} />
             </div>
 
             {/* 次に再生される曲 */}
@@ -128,7 +130,7 @@ export const NextTrack = ({
                     opacity: progress,
                 }}
             >
-                <TrackText track={nextTrack} />
+                <TrackText track={nextTrack} theme={theme} />
             </div>
         </TrackFrame>
     );
@@ -137,9 +139,11 @@ export const NextTrack = ({
 const TrackFrame = ({
     label,
     children,
+    theme,
 }: {
     label: "NEXT" | "NOW PLAYING";
     children: React.ReactNode;
+    theme: Theme;
 }) => {
     return (
         <div
@@ -160,9 +164,8 @@ const TrackFrame = ({
                     height: 106,
                     overflow: "hidden",
                     borderRadius: 16,
-                    border: "solid 2px #00A8FF",
-                    backgroundColor:
-                        "rgba(5, 10, 28, 0.35)",
+                    border: `solid 2px ${theme.accent.primary}`,
+                    backgroundColor: theme.background.panel,
                 }}
             >
                 {children}
@@ -181,7 +184,7 @@ const TrackFrame = ({
                     fontWeight: 500,
                     letterSpacing: 5.0,
                     lineHeight: 1,
-                    color: "#00A8FF",
+                    color: theme.accent.primary,
                     whiteSpace: "nowrap",
                     zIndex: 3,
                 }}
@@ -194,8 +197,10 @@ const TrackFrame = ({
 
 const TrackText = ({
     track,
+    theme,
 }: {
     track: Track;
+    theme: Theme;
 }) => {
     return (
         <div
@@ -214,7 +219,7 @@ const TrackText = ({
                 style={{
                     fontFamily:
                         "Urbanist, Noto Sans JP, sans-serif",
-                    color: "#B8F3FF",
+                    color: theme.text.primary,
                     fontSize: 40,
                     fontWeight: 500,
                     letterSpacing: 2.0,
@@ -232,7 +237,7 @@ const TrackText = ({
                     marginTop: 4,
                     fontFamily:
                         "Urbanist, Noto Sans JP, sans-serif",
-                    color: "#00A8FF",
+                    color: theme.accent.primary,
                     fontSize: 20,
                     lineHeight: 1.1,
                     whiteSpace: "nowrap",

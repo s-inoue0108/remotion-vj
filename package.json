@@ -30,7 +30,9 @@
     "dev": "remotion studio",
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
-    "lint": "eslint src && tsc"
+    "lint": "eslint src && tsc",
+    "render": "./scripts/render.sh",
+    "still": "./scripts/still.sh"
   },
   "sideEffects": [
     "*.css"

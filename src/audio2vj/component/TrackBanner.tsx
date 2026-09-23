@@ -4,13 +4,14 @@ import {
     interpolate,
     staticFile,
 } from "remotion";
-import { Track } from "../../types";
+import { Theme, Track } from "../../types";
 
 type Props = {
     path: string;
     frame: number;
     fps: number;
     tracks: Track[];
+    theme: Theme;
 };
 
 const FADE_DURATION = 1.0; // seconds
@@ -20,6 +21,7 @@ export const TrackBanner = ({
     frame,
     fps,
     tracks,
+    theme,
 }: Props) => {
     const time = frame / fps;
 
@@ -132,7 +134,7 @@ export const TrackBanner = ({
                 >
                     <div
                         style={{
-                            color: "#B8F3FF",
+                            color: theme.text.primary,
                             fontSize: 110,
                             fontWeight: 600,
                             letterSpacing: 3.0,
@@ -143,7 +145,7 @@ export const TrackBanner = ({
 
                     <div
                         style={{
-                            color: "#00A8FF",
+                            color: theme.accent.primary,
                             fontSize: 50,
                         }}
                     >

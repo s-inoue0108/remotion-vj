@@ -4,6 +4,7 @@ import {
 } from "remotion";
 
 import { VJBackground } from "./VJBackground";
+import { Theme } from "../../types";
 
 type Props = {
     frame: number;
@@ -11,9 +12,10 @@ type Props = {
     title: string;
     durationInFrames: number;
     fadeDurationInFrames: number;
+    theme: Theme;
 }
 
-export const Intro = ({ frame, fps, title, durationInFrames, fadeDurationInFrames }: Props) => {
+export const Intro = ({ frame, fps, title, durationInFrames, fadeDurationInFrames, theme }: Props) => {
     const fadeStart =
         durationInFrames - fadeDurationInFrames;
 
@@ -32,13 +34,14 @@ export const Intro = ({ frame, fps, title, durationInFrames, fadeDurationInFrame
             style={{
                 opacity,
                 zIndex: 100,
-                backgroundColor: "#FAF7FC",
+                backgroundColor: theme.background.primary,
             }}
         >
             {/* 背景 */}
             <VJBackground
                 frame={frame}
                 fps={fps}
+                theme={theme}
             />
 
             {/* サムネイル */}
@@ -51,7 +54,7 @@ export const Intro = ({ frame, fps, title, durationInFrames, fadeDurationInFrame
                 {title && (
                     <div
                         style={{
-                            color: "#000",
+                            color: theme.text.opening,
                             fontFamily:
                                 "Urbanist, Noto Sans JP, sans-serif",
                             fontSize: 120,

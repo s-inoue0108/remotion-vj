@@ -1,50 +1,40 @@
 # Remotion-VJ
 
-Rendering DJ mix audio into a VJ video.
+DJ Mix オーディオを VJ 動画へレンダリングするツール
 
-## Rendering
+## インストール
 
 ```bash
-npx remotion render wav2vj out.mp4 --props='{"path":"sample"}'
+npm install
 ```
 
-asset directory structure:
+## レンダリング
+
+動画：
+
+```bash
+npm run render -- sample sample.mp4
+```
+
+クリップ画像：
+
+```bash
+frame=10
+npm run still -- sample sample.png $frame
+```
+
+## ディレクトリ構造
 
 ```
-/public/samples/
+/public/sample/
 ├── covers/
 │   ├── sample1.jpg
 │   └── sample2.png
 ├── metadata.json
+├── theme.json
 └── sample.wav
 ```
 
-Content of `metadata.json`:
+`metadata.json` およびテーマカラーの JSON を必要とします：
 
-```json
-{
-    "title": "Sample Mix",
-    "audio": "sample.wav",
-    "date": "YYYY-MM-DD",
-    "tracks": [
-        {
-            "title": "Sample1",
-            "composer": "sample-1",
-            "cover": "covers/sample1.jpg",
-            "duration": {
-                "start": 0,
-                "end": 60
-            }
-        },
-        {
-            "title": "Sample2",
-            "composer": "sample-2",
-            "cover": "covers/sample2.png",
-            "duration": {
-                "start": 60,
-                "end": 120
-            }
-        }
-    ]
-}
-```
+https://github.com/s-inoue0108/remotion-vj/samples/
