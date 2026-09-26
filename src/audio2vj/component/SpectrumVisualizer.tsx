@@ -36,7 +36,7 @@ export const SpectrumVisualizer = ({
                 justifyContent: "space-between",
 
                 overflow: "hidden",
-                opacity: 0.3,
+                opacity: 0.5,
                 zIndex: 50,
             }}
         >

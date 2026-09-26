@@ -130,7 +130,7 @@ export const VJBackground = ({ frame, fps, theme }: Props) => {
                             ${theme.background.layer.bottom},
                             transparent 45%
                         ),
-                        #020817
+                        ${theme.background.primary}
                     `,
 
                     border: `2px solid ${theme.background.layer.border}`,
