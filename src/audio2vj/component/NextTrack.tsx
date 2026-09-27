@@ -8,7 +8,7 @@ type Props = {
     theme: Theme;
 };
 
-const TRANSITION_DURATION = 20;
+const TRANSITION_DURATION = 40;
 const SLIDE_DISTANCE = 80;
 
 export const NextTrack = ({

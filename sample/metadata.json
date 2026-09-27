@@ -1,28 +1,43 @@
 {
-    "title": "Sample Mix",
-    "audio": "sample.wav",
-    "date": "2026-09-22",
-    "bpm": 160,
-    "opening": 3,
+    "title": "Happy Hardcore Mix #1",
+    "audio": "20260921.wav",
+    "date": "2026-09-21",
+    "width": 1920,
+    "height": 1080,
+    "fps": 60,
+    "bpm": 175,
+    "opening": 5,
     "theme": "deepdark.json",
     "tracks": [
         {
-            "title": "music 1",
-            "composer": "composer 1",
-            "cover": "covers/cover.jpg",
+            "title": "Enter The Sky",
+            "composer": "iole",
+            "cover": "covers/perpetual_skyscape.jpg",
             "start": 0
         },
         {
-            "title": "music 2",
-            "composer": "composer 2",
-            "cover": "covers/cover.jpg",
-            "start": 5
+            "title": "cyanotype",
+            "composer": "Synthion",
+            "cover": "covers/cyanotype.jpg",
+            "start": 113
         },
         {
-            "title": "music 3",
-            "composer": "composer 3",
-            "cover": "covers/cover2.jpg",
-            "start": 10
+            "title": "Be There",
+            "composer": "YUKIYANAGI",
+            "cover": "covers/be_there.jpg",
+            "start": 233
+        },
+        {
+            "title": "Piece of Smile",
+            "composer": "Hexacube",
+            "cover": "covers/never_forget_vacation_9.jpg",
+            "start": 354
+        },
+        {
+            "title": "Colorful",
+            "composer": "TaKo (feat. 宮舞モカ)",
+            "cover": "covers/perpetual_skyscape_2.jpg",
+            "start": 464
         }
     ]
 }

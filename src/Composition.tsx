@@ -33,8 +33,11 @@ const calculateMetadata: CalculateMetadataFunction<Props> = async ({
   const durationInSeconds = media.durationInSeconds
 
   return {
+    width: metadata.width,
+    height: metadata.height,
+    fps: metadata.fps,
     durationInFrames: Math.ceil(
-      durationInSeconds * 30,
+      durationInSeconds * metadata.fps,
     ),
 
     props: {

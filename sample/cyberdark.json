@@ -1,0 +1,27 @@
+{
+    "background": {
+        "primary": "#04040c",
+        "layer": {
+            "top": "rgba(25, 55, 180, 0.18)",
+            "middle": "rgba(75, 35, 180, 0.13)",
+            "bottom": "rgba(35, 15, 100, 0.12)",
+            "border": "rgba(65, 80, 200, 0.32)"
+        },
+        "geometricEffect": {
+            "border": "rgba(155, 165, 255, 0.55)",
+            "background": "rgba(65, 55, 180, 0.10)"
+        },
+        "progressGuide": "rgba(160, 165, 255, 0.18)",
+        "panel": "rgba(8, 8, 22, 0.50)"
+    },
+    "text": {
+        "opening": "#ffffff",
+        "primary": "#d5d8ff",
+        "secondary": "#b5b9df",
+        "inactive": "rgba(213, 216, 255, 0.28)"
+    },
+    "accent": {
+        "primary": "#315cff",
+        "secondary": "#8b3dff"
+    }
+}

@@ -15,8 +15,11 @@ export type Track = {
 
 export type Metadata = {
     title: string;
-    date: string;
     audio: string;
+    date: string;
+    width: number;
+    height: number;
+    fps: number;
     bpm: number;
     opening: number;
     theme: string;
