@@ -135,9 +135,9 @@ export const TrackBanner = ({
                     <div
                         style={{
                             color: theme.text.primary,
-                            fontSize: 110,
+                            fontSize: track.title.length < 20 ? 110 : 100,
                             fontWeight: 600,
-                            letterSpacing: 3.0,
+                            letterSpacing: track.title.length < 20 ? 3.0 : 2.5,
                         }}
                     >
                         {track.title}

@@ -220,9 +220,9 @@ const TrackText = ({
                     fontFamily:
                         "Urbanist, Noto Sans JP, sans-serif",
                     color: theme.text.primary,
-                    fontSize: 40,
+                    fontSize: track.title.length < 20 ? 40 : 34,
                     fontWeight: 500,
-                    letterSpacing: 2.0,
+                    letterSpacing: track.title.length < 20 ? 2.0 : 1.7,
                     lineHeight: 1.1,
                     whiteSpace: "nowrap",
                     textAlign: "center",
