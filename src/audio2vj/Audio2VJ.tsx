@@ -29,7 +29,7 @@ export const Audio2VJ = ({
     const { fps, durationInFrames } = useVideoConfig();
 
     if (!metadata || !theme) return null;
-    const { title, date, bpm, opening, tracks } = metadata;
+    const { title, date, bpm, bins, opening, tracks } = metadata;
 
     const audioData = useAudioData(audioSrc);
     if (!audioData) return null;
@@ -38,7 +38,7 @@ export const Audio2VJ = ({
         fps,
         frame,
         audioData,
-        numberOfSamples: 512,
+        numberOfSamples: bins,
     });
 
     return (

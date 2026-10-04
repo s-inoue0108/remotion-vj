@@ -21,6 +21,7 @@ export type Metadata = {
     height: number;
     fps: number;
     bpm: number;
+    bins: number;
     opening: number;
     theme: string;
     tracks: Track[];
